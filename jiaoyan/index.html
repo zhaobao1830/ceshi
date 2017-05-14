@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>表单校验</title>
+    <link rel="stylesheet" type="text/css" href="bootstrap-3.3.0/css/bootstrap.css">
+    <style>
+        html,body{
+            margin:0;
+            padding:0;
+            width: 100%;
+            height: 100%;
+        }
+        #form-panel{
+            width: 40%;
+            padding: 30px;
+            border: 1px solid #bbb;
+            border-radius: 7px;
+            margin:auto;
+            margin-top: 10%;
+        }
+        #form-panel .form-control ~ p{
+            color: #c7254e;
+        }
+    </style>
+</head>
+<body>
+    <div id="form-panel">
+    <form id="html5Form" method="post" autocomplete="off" class="form-horizontal" action="提交数据">
+        <!--
+            必须输入    require
+            只能有字母数字下划线所组成  regex
+            不能重复注册   remote
+        -->
+        <div class="form-group">
+            <label class="col-lg-3 control-label">用户名</label>
+            <div class="col-lg-9">
+                <input type="text" class="form-control" name="username"
+                       data-dnv-required="true"
+                       data-dnv-required-message="用户名必须填写"
+                       data-dnv-regex="^\w+$"
+                       data-dnv-regex-message="用户名必须由字母数字下划线所组成"
+                       data-dnv-remote="result.json"
+                       data-dnv-remote-message="用户名已经被注册">
+            </div>
+        </div>
+        <!--
+            必须输入
+            必须是符合邮箱格式  email
+        -->
+        <div class="form-group">
+            <label class="col-lg-3 control-label">邮箱</label>
+            <div class="col-lg-9">
+                <input class="form-control" name="email"
+                       data-dnv-required="true"
+                       data-dnv-required-message="邮箱必须填写"
+                       data-dnv-email="true"
+                       data-dnv-email-message="邮箱不合法">
+            </div>
+        </div>
+        <!--
+            必须输入
+            必须是网址格式 website
+        -->
+        <div class="form-group">
+            <label class="col-lg-3 control-label">网址</label>
+            <div class="col-lg-9">
+                <input class="form-control" name="website"
+                       data-dnv-required="true"
+                       data-dnv-required-message="网址必须填写"
+                       data-dnv-website="true"
+                       data-dnv-website-message="网址不合法">
+            </div>
+        </div>
+        <!--
+            必须输入
+            必须是整数
+            必须在18岁到50岁之间的成年人
+        -->
+        <div class="form-group">
+            <label class="col-lg-3 control-label">年龄</label>
+            <div class="col-lg-9">
+                <input type="text" class="form-control" name="age"
+                       data-dnv-required="true"
+                       data-dnv-required-message="年龄必须填写"
+                       data-dnv-integer="true"
+                       data-dnv-integer-message="年龄必须是整数"
+                       data-dnv-between="18-50"
+                       data-dnv-between-message="年龄必须是18-50之间">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-lg-12 text-center">
+                <input class="btn btn-primary" type="submit" value="注册">
+                <input class="btn btn-primary" type="reset" value="重置">
+            </div>
+        </div>
+    </form>
+</div>
+    <script type="text/javascript" src="jquery/jquery-2.2.4.js"></script>
+    <script src="dn-validator-1.1.0/dn-validator.js"></script>
+    <script>
+        $(function () {
+            $("#html5Form").dnValidator({
+                emit : "keyup"
+            });//开启表单验证过功能
+        })
+    </script>
+</body>
+</html>
